@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Build for production (outputs to `docs/` for static hosting):
+Build for production (outputs to `docs/` for static hosting on GitHub Pages):
 
 ```bash
 npm run build

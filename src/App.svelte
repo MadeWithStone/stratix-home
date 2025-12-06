@@ -73,7 +73,7 @@
         <div class="hero-visual">
           <div class="hero-frame">
             <img
-              src="/header.png"
+              src="header.png"
               alt="Ground Guide mapping overlay displayed on a jobsite device"
             />
             <div class="overlay-card">
@@ -226,7 +226,7 @@
         <div class="split-visual">
           <div class="hardware-frame">
             <img
-              src="/equipment.png"
+              src="equipment.png"
               alt="Ground Guide AR mapping hardware kit with rugged tablet and sensors"
             />
             <div class="badge">Jobsite ready</div>
