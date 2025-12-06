@@ -1,6 +1,6 @@
 # Sub Vysion Home
 
-Svelte + Vite landing page for Sub Vysion, showcasing AR mapping software and rugged hardware for construction and utility teams.
+Svelte + Vite + Tailwind landing page for Sub Vysion, showcasing AR mapping software and rugged hardware for construction and utility teams.
 
 ## Getting started
 
