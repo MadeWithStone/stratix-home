@@ -7,7 +7,7 @@
   />
   <meta
     name="description"
-    content="Ground Guide delivers AR mapping and rugged hardware to help construction and utility crews see underground infrastructure before they dig."
+    content="Sub Vysion delivers AR mapping and rugged hardware to help construction and utility crews see underground infrastructure before they dig."
   />
 </svelte:head>
 
@@ -18,7 +18,7 @@
   <header class="site-header">
     <div class="brand">
       <span class="brand-mark">◆</span>
-      <span class="brand-name">Ground Guide</span>
+      <span class="brand-name">Sub Vysion</span>
     </div>
     <nav class="nav-links">
       <a href="#platform">Platform</a>
@@ -39,7 +39,7 @@
           <p class="eyebrow">Mapping intelligence for construction and utilities</p>
           <h1>See every buried asset before you dig.</h1>
           <p class="lede">
-            Ground Guide combines AR overlays with rugged field hardware so crews can visualize hidden infrastructure, validate
+            Sub Vysion combines AR overlays with rugged field hardware so crews can visualize hidden infrastructure, validate
             as-builts, and hand off clean data without slowing work.
           </p>
           <div class="cta-group">
@@ -74,7 +74,7 @@
           <div class="hero-frame">
             <img
               src="header.png"
-              alt="Ground Guide mapping overlay displayed on a jobsite device"
+              alt="Sub Vysion mapping overlay displayed on a jobsite device"
             />
             <div class="overlay-card">
               <div class="overlay-row">
@@ -121,7 +121,7 @@
           <div class="step">
             <div class="step-number">1</div>
             <h3>Capture</h3>
-            <p>Walk the route with the Ground Guide kit; lidar and RTK anchor pipes, conduits, and road crossings in real time.</p>
+            <p>Walk the route with the Sub Vysion kit; lidar and RTK anchor pipes, conduits, and road crossings in real time.</p>
           </div>
           <div class="step">
             <div class="step-number">2</div>
@@ -196,7 +196,7 @@
           <p class="eyebrow">Hardware kit</p>
           <h2>Rugged capture built for jobsite abuse.</h2>
             <p class="lede">
-            Ground Guide pairs AR-ready tablets with lidar and RTK so your overlays stay precise while crews stay fast.
+            Sub Vysion pairs AR-ready tablets with lidar and RTK so your overlays stay precise while crews stay fast.
           </p>
           <div class="hardware-specs">
             <div class="spec">
@@ -227,7 +227,7 @@
           <div class="hardware-frame">
             <img
               src="equipment.png"
-              alt="Ground Guide AR mapping hardware kit with rugged tablet and sensors"
+              alt="Sub Vysion AR mapping hardware kit with rugged tablet and sensors"
             />
             <div class="badge">Jobsite ready</div>
           </div>
@@ -248,7 +248,7 @@
           <p class="eyebrow">Trusted by field teams</p>
           <h3>Built with crews, inspectors, and owners in mind.</h3>
             <p class="lede">
-            From utility locators to fiber installers, Ground Guide keeps every stakeholder aligned with clean, georeferenced
+            From utility locators to fiber installers, Sub Vysion keeps every stakeholder aligned with clean, georeferenced
             data.
           </p>
           <div class="trust-logos">
@@ -271,7 +271,7 @@
           </p>
         </div>
         <div class="cta-actions">
-          <a class="btn primary" href="mailto:hello@groundguide.com">Book a demo</a>
+          <a class="btn primary" href="mailto:hello@subvysion.com">Book a demo</a>
           <a class="btn ghost" href="#platform">Preview the platform</a>
         </div>
       </div>
