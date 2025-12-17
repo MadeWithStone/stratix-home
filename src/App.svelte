@@ -1,8 +1,57 @@
+<script>
+  import { onMount } from "svelte";
+
+  const CONTACT_EMAIL = "maxwell@subvysion.com";
+  let scrollY = 0;
+  let heroImage;
+
+  const smoothScroll = (event) => {
+    const href = event.currentTarget.getAttribute("href");
+    if (href && href.startsWith("#")) {
+      event.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  onMount(() => {
+    const handleScroll = () => {
+      scrollY = window.scrollY;
+      if (heroImage) {
+        heroImage.style.transform = `translateY(${scrollY * 0.08}px)`;
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
+
+  const handleContactSubmit = (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const name = (data.get("name") || "").toString().trim();
+    const email = (data.get("email") || "").toString().trim();
+    const details = (data.get("details") || "").toString().trim();
+
+    const subject = encodeURIComponent("Sub Vysion inquiry");
+    const bodyLines = [
+      name ? `Name: ${name}` : null,
+      email ? `Email: ${email}` : null,
+      details ? `Project details: ${details}` : null,
+    ].filter(Boolean);
+
+    const body = encodeURIComponent(bodyLines.join("\n"));
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}${body ? `&body=${body}` : ""}`;
+  };
+</script>
+
 <svelte:head>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&family=Noto+Sans:wght@400;600;700&display=swap"
     rel="stylesheet"
   />
   <meta
@@ -12,41 +61,71 @@
 </svelte:head>
 
 <div class="relative min-h-screen overflow-hidden font-sans">
+  <div class="absolute inset-0 -z-10 bg-white"></div>
+  <!-- Color splashes -->
   <div
-    class="absolute inset-x-0 top-0 -z-10 h-[110vh] min-h-[720px] bg-cover bg-center bg-no-repeat"
-    style="background-image: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.6)), url('header.png'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+    class="pointer-events-none absolute -left-32 -top-32 h-[400px] w-[400px] rounded-full bg-teal-400/20 blur-[100px]"
+  ></div>
+  <div
+    class="pointer-events-none absolute right-[-8rem] top-[5%] h-[350px] w-[350px] rounded-full bg-sky-400/15 blur-[100px]"
+  ></div>
+  <div
+    class="pointer-events-none absolute left-[10%] top-[50%] h-[300px] w-[300px] rounded-full bg-emerald-400/15 blur-[120px]"
+  ></div>
+  <div
+    class="pointer-events-none absolute right-[15%] top-[60%] h-[250px] w-[250px] rounded-full bg-teal-300/12 blur-[100px]"
   ></div>
   <header class="sticky top-0 z-30 bg-transparent">
     <div class="relative">
       <div
-        class="relative mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-4 text-white"
+        class="relative mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5 text-slate-900"
       >
-        <div class="flex items-center gap-3 font-semibold tracking-wide">
+        <a href="#" class="flex items-center gap-2">
+          <img src="logo.svg" alt="SubVysion logo" class="h-9 w-9" />
           <span
-            class="relative flex h-10 w-10 items-center justify-center rounded-full bg-white/25 ring-1 ring-white/30 shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+            class="text-xl font-bold"
+            style="font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;"
           >
-            <span
-              class="h-2.5 w-2.5 rounded-full bg-teal-300 ring-2 ring-white/70 shadow-[0_0_0_8px_rgba(94,234,212,0.25)]"
-            ></span>
+            SubVysion
           </span>
-          <span>Sub Vysion</span>
-        </div>
+        </a>
         <nav
-          class="hidden items-center gap-6 text-sm font-medium text-white/80 md:flex"
+          class="hidden items-center gap-7 text-base font-medium text-slate-700 md:flex"
         >
-          <a class="hover:text-white" href="#workflow">Workflow</a>
-          <a class="hover:text-white" href="#platform">Platform</a>
-          <a class="hover:text-white" href="#pricing">Pricing</a>
-          <a class="hover:text-white" href="#trusted">Trusted</a>
-          <a class="hover:text-white" href="#contact">Contact</a>
-        </nav>
-        <div class="flex items-center gap-3">
           <a
-            class="text-sm font-semibold text-white/80 underline decoration-white/30 underline-offset-4 transition hover:text-white"
-            href="#workflow">View workflow</a
+            class="hover:text-slate-900"
+            href="#workflow"
+            on:click={smoothScroll}>Workflow</a
           >
           <a
-            class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 shadow-lg shadow-teal-500/20 transition hover:-translate-y-0.5 hover:bg-white"
+            class="hover:text-slate-900"
+            href="#platform"
+            on:click={smoothScroll}>Platform</a
+          >
+          <a
+            class="hover:text-slate-900"
+            href="#pricing"
+            on:click={smoothScroll}>Pricing</a
+          >
+          <a
+            class="hover:text-slate-900"
+            href="#trusted"
+            on:click={smoothScroll}>Trusted</a
+          >
+          <a
+            class="hover:text-slate-900"
+            href="#contact"
+            on:click={smoothScroll}>Contact</a
+          >
+        </nav>
+        <div class="flex items-center gap-4">
+          <a
+            class="text-base font-semibold text-slate-700 underline decoration-teal-400/50 underline-offset-4 transition hover:decoration-teal-400"
+            href="#workflow"
+            on:click={smoothScroll}>View workflow</a
+          >
+          <a
+            class="inline-flex items-center gap-2 rounded-full bg-teal-600 px-5 py-2.5 text-base font-semibold text-white shadow-lg shadow-teal-500/30 transition hover:-translate-y-0.5 hover:bg-teal-700"
             href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
             target="_blank"
             rel="noreferrer"
@@ -59,60 +138,55 @@
   </header>
 
   <main class="relative z-10">
-    <section class="relative overflow-hidden py-20 sm:py-24 text-white">
-      <div class="relative mx-auto max-w-5xl px-6">
-        <div
-          class="space-y-7 max-w-3xl md:w-3/5"
-          style="text-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);"
-        >
-          <p
-          class="inline-flex items-center gap-2 rounded-full bg-white/25 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white ring-1 ring-white/30"
-          >
-            Bring your own maps to life in AR
-          </p>
-          <h1
-            class="text-4xl font-display font-semibold leading-tight text-white sm:text-5xl lg:text-6xl"
-          >
-            See every buried asset before you dig.
-          </h1>
-          <p class="max-w-2xl text-lg text-slate-100">
-            Turn your GIS, CAD, or as-built data into accurate AR overlays,
-            align visually on site, and walk your own maps in the field or on
-            the web.
-          </p>
-          <div class="flex flex-wrap gap-3">
-            <a
-              class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white px-5 py-3 text-sm font-semibold text-slate-900 shadow-xl shadow-teal-500/20 transition hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-teal-500/30"
-              href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
-              target="_blank"
-              rel="noreferrer"
+    <section class="relative overflow-hidden py-20 sm:py-24 text-slate-900">
+      <div class="relative mx-auto max-w-6xl px-6">
+        <div class="grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center">
+          <div class="space-y-7">
+            <p
+              class="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-800 shadow-sm"
             >
-              Schedule a walkthrough
-            </a>
-            <a
-              class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/15"
-              href="#workflow"
+              Bring underground infrastructure to life
+            </p>
+            <h1
+              class="text-3xl font-display font-semibold leading-tight text-slate-900 sm:text-4xl lg:text-5xl"
             >
-              See how it works
-            </a>
+              See every buried asset before you dig.
+            </h1>
+            <p class="max-w-2xl text-lg text-slate-600">
+              We combine ground-penetrating radar with your GIS and as-built
+              data to create accurate AR overlays you can view on any phone.
+            </p>
+            <div class="flex flex-wrap gap-3">
+              <a
+                class="inline-flex items-center gap-2 rounded-full bg-teal-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/40 transition hover:-translate-y-0.5 hover:bg-teal-700"
+                href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Schedule a walkthrough
+              </a>
+              <a
+                class="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/70 px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-teal-300 hover:bg-white"
+                href="#workflow"
+                on:click={smoothScroll}
+              >
+                See how it works
+              </a>
+            </div>
+          </div>
+          <div class="flex justify-center md:justify-end">
+            <img
+              bind:this={heroImage}
+              src="map_render_export.png"
+              alt="3D render of underground utilities"
+              class="w-full max-w-2xl transition-transform duration-100 ease-out will-change-transform"
+            />
           </div>
         </div>
       </div>
     </section>
 
-    <section
-      class="relative overflow-hidden py-14 sm:py-16"
-      id="workflow"
-    >
-      <div
-        class="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-50"
-      ></div>
-      <div
-        class="pointer-events-none absolute -left-20 top-[-10%] h-64 w-64 rounded-full bg-teal-200/40 blur-3xl"
-      ></div>
-      <div
-        class="pointer-events-none absolute right-6 bottom-6 h-56 w-56 rounded-full bg-sky-200/35 blur-2xl"
-      ></div>
+    <section class="relative overflow-hidden py-14 sm:py-16" id="workflow">
       <div class="relative mx-auto max-w-6xl px-6">
         <div
           class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"
@@ -126,17 +200,23 @@
             <h2
               class="mt-3 text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
             >
-              From Upload to AR Walkthrough.
+              From Data to AR in Three Steps.
             </h2>
           </div>
         </div>
-        <div class="mt-8 grid gap-5 md:grid-cols-3">
-          <div
-            class="group flex h-full flex-col gap-4 rounded-3xl border border-white/60 bg-white/80 p-5 shadow-xl shadow-slate-900/5 ring-1 ring-slate-200/60 backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-teal-500/15"
-          >
+        <div class="mt-8 grid gap-8 md:grid-cols-3">
+          <div class="group flex h-full flex-col gap-5">
+            <div class="overflow-hidden rounded-2xl shadow-lg shadow-slate-900/10">
+              <img
+                src="map.jpg"
+                alt="GPR and GIS data collection"
+                class="w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+                style="aspect-ratio: 4 / 3;"
+              />
+            </div>
             <div class="flex items-center gap-3">
               <div
-                class="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600"
+                class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600"
               >
                 <svg
                   class="h-5 w-5"
@@ -153,85 +233,25 @@
                   <path d="M10 18h4" stroke-linecap="round" />
                 </svg>
               </div>
-              <h3 class="text-lg font-semibold text-slate-900">Upload</h3>
+              <h3 class="text-lg font-semibold text-slate-900">Collect</h3>
             </div>
             <p class="text-slate-600">
-              Upload GIS, CAD, or GeoJSON files and keep them versioned in the
-              cloud. Your source of truth is ready for AR in minutes.
+              We combine ground-penetrating radar scans with your as-builts and
+              GIS map data to build a complete picture of what's underground.
             </p>
-            <div
-              class="mt-auto overflow-hidden rounded-2xl border border-slate-200/70 shadow-inner"
-            >
-              <img
-                src="map.jpg"
-                alt="Surveyed map preview"
-                class="w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
-                style="aspect-ratio: 4 / 3;"
-              />
-            </div>
           </div>
-          <div
-            class="group flex h-full flex-col gap-4 rounded-3xl border border-white/60 bg-white/80 p-5 shadow-xl shadow-slate-900/5 ring-1 ring-slate-200/60 backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-teal-500/15"
-          >
-            <div class="flex items-center gap-3">
-              <div
-                class="flex h-9 w-9 items-center justify-center rounded-xl bg-sky-50 text-sky-600"
-              >
-                <svg
-                  class="h-5 w-5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                >
-                  <path d="M5 7.5c3-1.5 11-1.5 14 0" />
-                  <rect x="5" y="7.5" width="14" height="9" rx="2" />
-                  <path
-                    d="M9 12s1.5-1.5 3-1.5 3 1.5 3 1.5"
-                    stroke-linecap="round"
-                  />
-                  <circle
-                    cx="9"
-                    cy="13.5"
-                    r=".8"
-                    fill="currentColor"
-                    stroke="none"
-                  />
-                  <circle
-                    cx="15"
-                    cy="13.5"
-                    r=".8"
-                    fill="currentColor"
-                    stroke="none"
-                  />
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold text-slate-900">
-                Align & View
-              </h3>
-            </div>
-            <p class="text-slate-600">
-              Align visually or to control points and walk your route in AR.
-              Toggle layers, validate segments, and switch between AR and web
-              views.
-            </p>
-            <div
-              class="mt-auto overflow-hidden rounded-2xl border border-slate-200/70 shadow-inner"
-            >
+          <div class="group flex h-full flex-col gap-5">
+            <div class="overflow-hidden rounded-2xl shadow-lg shadow-slate-900/10">
               <img
                 src="view.png"
-                alt="AR and web overlay preview"
+                alt="Data processing and overlay creation"
                 class="w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
                 style="aspect-ratio: 4 / 3;"
               />
             </div>
-          </div>
-          <div
-            class="group flex h-full flex-col gap-4 rounded-3xl border border-white/60 bg-white/80 p-5 shadow-xl shadow-slate-900/5 ring-1 ring-slate-200/60 backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-teal-500/15"
-          >
             <div class="flex items-center gap-3">
               <div
-                class="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50 text-amber-600"
+                class="flex h-10 w-10 items-center justify-center rounded-full bg-sky-100 text-sky-600"
               >
                 <svg
                   class="h-5 w-5"
@@ -240,36 +260,55 @@
                   stroke="currentColor"
                   stroke-width="1.5"
                 >
-                  <path d="M6 16c2-2 4.5-4.5 6-7" stroke-linecap="round" />
-                  <path d="M14 3h3l-1 5" />
-                  <path d="M5 21h14" stroke-linecap="round" />
-                  <path d="M9 12c-.5 1.5-1.5 2.5-3 3" stroke-linecap="round" />
-                  <path d="M12.5 8.5 16 12" stroke-linecap="round" />
+                  <path d="M4 6h16M4 12h16M4 18h10" stroke-linecap="round" />
+                  <path d="M17 15l3 3-3 3" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
               </div>
-              <h3 class="text-lg font-semibold text-slate-900">Share</h3>
+              <h3 class="text-lg font-semibold text-slate-900">Process</h3>
             </div>
-            <p class="mt-2 text-slate-600">
-              Share AR sessions or web links with crews, inspectors, and owners
-              so everyone sees the same, up-to-date map in context.
+            <p class="text-slate-600">
+              Our platform fuses radar data with your existing records to create
+              accurate, georeferenced AR overlays ready for the field.
             </p>
-            <div
-              class="mt-auto overflow-hidden rounded-2xl border border-slate-200/70 shadow-inner"
-            >
+          </div>
+          <div class="group flex h-full flex-col gap-5">
+            <div class="overflow-hidden rounded-2xl shadow-lg shadow-slate-900/10">
               <img
                 src="dig.png"
-                alt="Crews digging with AR overlay"
+                alt="Viewing underground utilities in AR on phone"
                 class="w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
                 style="aspect-ratio: 4 / 3;"
               />
             </div>
+            <div class="flex items-center gap-3">
+              <div
+                class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-600"
+              >
+                <svg
+                  class="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <rect x="5" y="2" width="14" height="20" rx="2" />
+                  <path d="M12 18h.01" stroke-linecap="round" />
+                  <path d="M9 5h6" stroke-linecap="round" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900">View in AR</h3>
+            </div>
+            <p class="text-slate-600">
+              Open the app on your phone, point at the ground, and see buried
+              utilities rendered in augmented reality right where they are.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
     <section
-      class="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 py-12 sm:py-14"
+      class="relative overflow-hidden bg-white py-12 sm:py-14"
       id="platform"
     >
       <div class="mx-auto max-w-6xl px-6">
@@ -514,7 +553,7 @@
     </section>
 
     <section
-      class="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 py-12 sm:py-14"
+      class="relative overflow-hidden bg-white py-12 sm:py-14"
       id="pricing"
     >
       <div class="mx-auto max-w-6xl px-6">
@@ -546,16 +585,16 @@
                 </p>
               </div>
               <div class="text-right">
-                <div class="text-3xl font-display font-semibold text-slate-900">
-                  $25
+                <div class="text-xl font-display font-semibold text-slate-900">
+                  Talk to sales
                 </div>
-                <div class="text-sm text-slate-500">per seat / month</div>
               </div>
             </div>
             <ul class="space-y-2 text-sm text-slate-700">
               <li class="flex items-center gap-2">
-                <span class="text-teal-700">✓</span
-                ><span>Uploads & cloud sync</span>
+                <span class="text-teal-700">✓</span><span
+                  >Uploads & cloud sync</span
+                >
               </li>
               <li class="flex items-center gap-2">
                 <span class="text-teal-700">✓</span><span>Platform</span>
@@ -595,15 +634,16 @@
                 </p>
               </div>
               <div class="text-right">
-                <div class="text-3xl font-display font-semibold text-slate-900">
+                <div class="text-xl font-display font-semibold text-slate-900">
                   Talk to sales
                 </div>
               </div>
             </div>
             <ul class="space-y-2 text-sm text-slate-700">
               <li class="flex items-center gap-2">
-                <span class="text-teal-700">✓</span
-                ><span>Uploads & cloud sync</span>
+                <span class="text-teal-700">✓</span><span
+                  >Uploads & cloud sync</span
+                >
               </li>
               <li class="flex items-center gap-2">
                 <span class="text-teal-700">✓</span><span>Platform</span>
@@ -639,7 +679,7 @@
     </section>
 
     <section
-      class="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 py-12 sm:py-14"
+      class="relative overflow-hidden bg-white py-12 sm:py-14"
       id="trusted"
     >
       <div class="mx-auto max-w-6xl px-6">
@@ -648,8 +688,8 @@
             class="overflow-hidden rounded-2xl border border-slate-200 shadow-card"
           >
             <img
-              src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1400&q=80"
-              alt="Construction and utility crew collaborating on site"
+              src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1400&q=80"
+              alt="Construction site with workers"
               class="h-full w-full object-cover"
             />
           </div>
@@ -662,17 +702,22 @@
             <h3
               class="text-2xl font-display font-semibold text-slate-900 sm:text-3xl"
             >
-              Built with crews, inspectors, and owners in mind.
+              Built with crews and contractors in mind.
             </h3>
             <p class="text-lg text-slate-600">
-              From utility locators to fiber installers, Sub Vysion keeps every
+              From utility locators to general contractors, SubVysion keeps every
               stakeholder aligned with clean, georeferenced data.
             </p>
             <div class="grid gap-3 sm:grid-cols-2">
               <div
                 class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
               >
-                Regional utilities
+                General contractors
+              </div>
+              <div
+                class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
+              >
+                Utility locators
               </div>
               <div
                 class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
@@ -687,7 +732,12 @@
               <div
                 class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
               >
-                Municipal inspectors
+                Excavation crews
+              </div>
+              <div
+                class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
+              >
+                Civil engineers
               </div>
             </div>
           </div>
@@ -696,142 +746,95 @@
     </section>
 
     <section
-      class="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 py-12 sm:py-14"
+      class="relative overflow-hidden bg-white py-12 sm:py-14"
       id="contact"
     >
       <div class="mx-auto max-w-6xl px-6">
         <div
-          class="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-gradient-to-r from-teal-700 to-sky-700 px-6 py-8 text-white shadow-card sm:flex-row sm:items-center sm:justify-between"
+          class="rounded-2xl bg-gradient-to-r from-teal-600 to-teal-700 p-8 shadow-xl md:p-10"
         >
-          <div class="space-y-2">
-            <p
-              class="text-sm font-semibold uppercase tracking-wide text-teal-100"
-            >
-              Ready to see it live?
-            </p>
-            <h2 class="text-3xl font-display font-semibold">
-              Bring AR overlays to your next dig window.
-            </h2>
-            <p class="text-base text-teal-100">
-              Tell us about your sites, utilities, and timelines—we will tailor
-              a demo to your crew and handoff requirements.
-            </p>
-          </div>
-          <div class="flex flex-wrap gap-3">
-            <a
-              class="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-4 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20"
-              href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Book a demo
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section
-      class="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50 py-12 sm:py-14"
-    >
-      <div class="mx-auto max-w-6xl px-6">
-        <div
-          class="grid gap-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-card md:grid-cols-[1.1fr_0.9fr] md:p-8"
-        >
-          <div class="space-y-3">
-            <p
-              class="inline-flex items-center gap-2 rounded-full bg-teal-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-800"
-            >
-              Contact us
-            </p>
-            <h3 class="text-2xl font-display font-semibold text-slate-900">
-              Questions about your site or deployment?
-            </h3>
-            <p class="text-slate-600">
-              Tell us about your utilities, timelines, or alignment needs. We
-              respond within one business day with next steps and a tailored
-              plan.
-            </p>
-            <div class="grid gap-3 sm:grid-cols-2">
-              <div
-                class="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700"
+          <div class="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-start">
+            <div class="space-y-4">
+              <p
+                class="text-sm font-semibold uppercase tracking-wide text-teal-100"
               >
-                <div class="font-semibold text-slate-900">Email</div>
+                Ready to see it live?
+              </p>
+              <h2 class="text-3xl font-display font-semibold text-white">
+                Bring AR overlays to your next dig window.
+              </h2>
+              <p class="text-base text-white/90">
+                Tell us about your sites, utilities, and timelines—we'll tailor
+                a demo to your crew and handoff requirements.
+              </p>
+              <div class="flex flex-wrap gap-x-4 gap-y-2 pt-2">
                 <a
-                  class="text-teal-700 underline"
-                  href="mailto:maxwell@subvysion.com">maxwell@subvysion.com</a
+                  class="inline-flex items-center gap-2 text-sm font-medium text-white underline decoration-white/60 underline-offset-4 transition hover:decoration-white"
+                  href="mailto:maxwell@subvysion.com"
                 >
+                  maxwell@subvysion.com
+                </a>
+                <a
+                  class="inline-flex items-center gap-2 text-sm font-medium text-white underline decoration-white/60 underline-offset-4 transition hover:decoration-white"
+                  href="mailto:wenson@subvysion.com"
+                >
+                  wenson@subvysion.com
+                </a>
+                <a
+                  class="inline-flex items-center gap-2 text-sm font-medium text-white underline decoration-white/60 underline-offset-4 transition hover:decoration-white"
+                  href="tel:+12158747715"
+                >
+                  (215) 874-7715
+                </a>
               </div>
             </div>
+            <form class="grid gap-3" on:submit={handleContactSubmit}>
+              <div class="grid gap-1">
+                <label class="text-sm font-medium text-white" for="name"
+                  >Name</label
+                >
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                  class="w-full rounded-lg border border-white/30 bg-white/20 px-3 py-2.5 text-white placeholder-white/50 outline-none transition focus:border-white/50 focus:bg-white/25"
+                />
+              </div>
+              <div class="grid gap-1">
+                <label class="text-sm font-medium text-white" for="email"
+                  >Email</label
+                >
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  placeholder="name@company.com"
+                  class="w-full rounded-lg border border-white/30 bg-white/20 px-3 py-2.5 text-white placeholder-white/50 outline-none transition focus:border-white/50 focus:bg-white/25"
+                />
+              </div>
+              <div class="grid gap-1">
+                <label class="text-sm font-medium text-white" for="details"
+                  >Project details</label
+                >
+                <textarea
+                  id="details"
+                  name="details"
+                  rows="3"
+                  placeholder="Utility type, timelines, sites..."
+                  class="w-full rounded-lg border border-white/30 bg-white/20 px-3 py-2.5 text-white placeholder-white/50 outline-none transition focus:border-white/50 focus:bg-white/25"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="mt-2 inline-flex items-center justify-center rounded-lg bg-white px-4 py-3 text-sm font-semibold text-teal-700 shadow-lg transition hover:-translate-y-0.5 hover:bg-teal-50"
+              >
+                Send message
+              </button>
+            </form>
           </div>
-          <form class="grid gap-3" on:submit={handleContactSubmit}>
-            <div class="grid gap-1">
-              <label class="text-sm font-semibold text-slate-800" for="name"
-                >Name</label
-              >
-              <input
-                id="name"
-                type="text"
-                name="name"
-                placeholder="Your name"
-                class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 outline-none transition focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
-              />
-            </div>
-            <div class="grid gap-1">
-              <label class="text-sm font-semibold text-slate-800" for="email"
-                >Email</label
-              >
-              <input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="name@company.com"
-                class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 outline-none transition focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
-              />
-            </div>
-            <div class="grid gap-1">
-              <label class="text-sm font-semibold text-slate-800" for="details"
-                >Project details</label
-              >
-              <textarea
-                id="details"
-                name="details"
-                rows="3"
-                placeholder="Utility type, timelines, sites, alignment needs..."
-                class="w-full rounded-lg border border-slate-200 px-3 py-2 text-slate-900 outline-none transition focus:border-teal-600 focus:ring-2 focus:ring-teal-100"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              class="mt-2 inline-flex items-center justify-center rounded-xl bg-teal-700 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:-translate-y-0.5 hover:bg-teal-800"
-            >
-              Send message
-            </button>
-          </form>
         </div>
       </div>
     </section>
   </main>
 </div>
-<script>
-  const CONTACT_EMAIL = 'maxwell@subvysion.com';
-
-  const handleContactSubmit = (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
-    const name = (data.get('name') || '').toString().trim();
-    const email = (data.get('email') || '').toString().trim();
-    const details = (data.get('details') || '').toString().trim();
-
-    const subject = encodeURIComponent('Sub Vysion inquiry');
-    const bodyLines = [
-      name ? `Name: ${name}` : null,
-      email ? `Email: ${email}` : null,
-      details ? `Project details: ${details}` : null
-    ].filter(Boolean);
-
-    const body = encodeURIComponent(bodyLines.join('\n'));
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}${body ? `&body=${body}` : ''}`;
-  };
-</script>
