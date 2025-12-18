@@ -60,25 +60,17 @@
   />
 </svelte:head>
 
-<div class="relative min-h-screen overflow-hidden font-sans">
-  <div class="absolute inset-0 -z-10 bg-white"></div>
-  <!-- Color splashes -->
-  <div
-    class="pointer-events-none absolute -left-32 -top-32 h-[400px] w-[400px] rounded-full bg-teal-400/20 blur-[100px]"
-  ></div>
-  <div
-    class="pointer-events-none absolute right-[-8rem] top-[5%] h-[350px] w-[350px] rounded-full bg-sky-400/15 blur-[100px]"
-  ></div>
-  <div
-    class="pointer-events-none absolute left-[10%] top-[50%] h-[300px] w-[300px] rounded-full bg-emerald-400/15 blur-[120px]"
-  ></div>
-  <div
-    class="pointer-events-none absolute right-[15%] top-[60%] h-[250px] w-[250px] rounded-full bg-teal-300/12 blur-[100px]"
-  ></div>
-  <header class="sticky top-0 z-30 bg-transparent">
-    <div class="relative">
+<div class="relative min-h-screen overflow-hidden font-sans bg-white">
+  <!-- Subtle gradient color accents that scroll with page -->
+  <div class="pointer-events-none absolute top-0 left-0 right-0 h-[4000px] -z-10">
+    <div class="absolute top-[400px] left-[-10%] h-[800px] w-[800px] rounded-full bg-teal-400/20 blur-[200px]"></div>
+    <div class="absolute top-[1200px] right-[-10%] h-[700px] w-[700px] rounded-full bg-sky-400/15 blur-[200px]"></div>
+    <div class="absolute top-[2000px] left-[10%] h-[600px] w-[600px] rounded-full bg-emerald-400/15 blur-[200px]"></div>
+    <div class="absolute top-[2800px] right-[5%] h-[700px] w-[700px] rounded-full bg-teal-300/15 blur-[200px]"></div>
+  </div>
+  <header class="absolute top-0 left-0 right-0 z-30">
       <div
-        class="relative mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5 text-slate-900"
+        class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5 text-slate-900"
       >
         <a href="#" class="flex items-center gap-2">
           <img src="logo.svg" alt="SubVysion logo" class="h-9 w-9" />
@@ -118,219 +110,217 @@
             on:click={smoothScroll}>Contact</a
           >
         </nav>
-        <div class="flex items-center gap-4">
-          <a
-            class="text-base font-semibold text-slate-700 underline decoration-teal-400/50 underline-offset-4 transition hover:decoration-teal-400"
-            href="#workflow"
-            on:click={smoothScroll}>View workflow</a
-          >
-          <a
-            class="inline-flex items-center gap-2 rounded-full bg-teal-600 px-5 py-2.5 text-base font-semibold text-white shadow-lg shadow-teal-500/30 transition hover:-translate-y-0.5 hover:bg-teal-700"
-            href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Book a demo
-          </a>
-        </div>
+        <a
+          class="inline-flex items-center gap-2 rounded-full bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-700"
+          href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Book a demo
+        </a>
       </div>
-    </div>
   </header>
 
   <main class="relative z-10">
-    <section class="relative overflow-hidden py-20 sm:py-24 text-slate-900">
+    <section class="relative overflow-hidden pt-40 pb-40 sm:pt-52 sm:pb-56 lg:pt-60 lg:pb-72 text-slate-900">
+      <div
+        class="pointer-events-none absolute inset-0 -z-10 bg-[url('background.png')] bg-cover bg-center"
+      ></div>
+      <div
+        class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-white/90 via-white/70 to-transparent"
+      ></div>
+      <div
+        class="pointer-events-none absolute inset-x-0 bottom-0 h-32 -z-10 bg-gradient-to-t from-white to-transparent"
+      ></div>
       <div class="relative mx-auto max-w-6xl px-6">
-        <div class="grid gap-10 md:grid-cols-[1.1fr_1fr] md:items-center">
-          <div class="space-y-7">
-            <p
-              class="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-800 shadow-sm"
+        <div class="max-w-2xl">
+          <h1
+            class="text-4xl font-display font-bold leading-tight text-slate-900 sm:text-5xl lg:text-6xl tracking-tight"
+          >
+            See every buried asset before you dig.
+          </h1>
+          <p class="mt-6 text-lg text-slate-700 leading-relaxed">
+            We combine ground-penetrating radar with your GIS and as-built
+            data to create accurate AR overlays you can view on any phone.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              class="inline-flex items-center gap-2 rounded-full bg-teal-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-teal-700"
+              href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
+              target="_blank"
+              rel="noreferrer"
             >
-              Bring underground infrastructure to life
-            </p>
-            <h1
-              class="text-3xl font-display font-semibold leading-tight text-slate-900 sm:text-4xl lg:text-5xl"
+              Schedule a walkthrough
+            </a>
+            <a
+              class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
+              href="#workflow"
+              on:click={smoothScroll}
             >
-              See every buried asset before you dig.
-            </h1>
-            <p class="max-w-2xl text-lg text-slate-600">
-              We combine ground-penetrating radar with your GIS and as-built
-              data to create accurate AR overlays you can view on any phone.
-            </p>
-            <div class="flex flex-wrap gap-3">
-              <a
-                class="inline-flex items-center gap-2 rounded-full bg-teal-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/40 transition hover:-translate-y-0.5 hover:bg-teal-700"
-                href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Schedule a walkthrough
-              </a>
-              <a
-                class="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white/70 px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-teal-300 hover:bg-white"
-                href="#workflow"
-                on:click={smoothScroll}
-              >
-                See how it works
-              </a>
-            </div>
-          </div>
-          <div class="flex justify-center md:justify-end">
-            <img
-              bind:this={heroImage}
-              src="map_render_export.png"
-              alt="3D render of underground utilities"
-              class="w-full max-w-2xl transition-transform duration-100 ease-out will-change-transform"
-            />
+              See how it works
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="relative overflow-hidden py-14 sm:py-16" id="workflow">
+    <section class="relative overflow-hidden py-16 sm:py-24 bg-transparent" id="workflow">
       <div class="relative mx-auto max-w-6xl px-6">
-        <div
-          class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"
-        >
-          <div>
-            <p
-              class="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-800 shadow-sm"
-            >
-              Workflow
-            </p>
-            <h2
-              class="mt-3 text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
-            >
-              From Data to AR in Three Steps.
-            </h2>
-          </div>
+        <div class="max-w-xl">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-teal-600"
+          >
+            Workflow
+          </p>
+          <h2
+            class="mt-2 text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
+          >
+            From Data to AR in Three Steps
+          </h2>
         </div>
-        <div class="mt-8 grid gap-8 md:grid-cols-3">
-          <div class="group flex h-full flex-col gap-5">
-            <div class="overflow-hidden rounded-2xl shadow-lg shadow-slate-900/10">
+        <div class="mt-12 grid gap-8 md:grid-cols-3">
+          <div class="group flex h-full flex-col">
+            <div
+              class="overflow-hidden rounded-xl border border-slate-200"
+            >
               <img
                 src="map.jpg"
                 alt="GPR and GIS data collection"
-                class="w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+                class="w-full object-cover"
                 style="aspect-ratio: 4 / 3;"
               />
             </div>
-            <div class="flex items-center gap-3">
-              <div
-                class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600"
-              >
-                <svg
-                  class="h-5 w-5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
+            <div class="mt-5">
+              <div class="flex items-center gap-3">
+                <div
+                  class="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-teal-600"
                 >
-                  <path
-                    d="M12 3a5 5 0 0 1 5 5c0 3.5-3.8 7.3-4.6 8.1a.6.6 0 0 1-.8 0C10.8 15.3 7 11.5 7 8a5 5 0 0 1 5-5Z"
-                  />
-                  <circle cx="12" cy="8" r="1.6" />
-                  <path d="M8 20h8" stroke-linecap="round" />
-                  <path d="M10 18h4" stroke-linecap="round" />
-                </svg>
+                  <svg
+                    class="h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <path
+                      d="M12 3a5 5 0 0 1 5 5c0 3.5-3.8 7.3-4.6 8.1a.6.6 0 0 1-.8 0C10.8 15.3 7 11.5 7 8a5 5 0 0 1 5-5Z"
+                    />
+                    <circle cx="12" cy="8" r="1.6" />
+                    <path d="M8 20h8" stroke-linecap="round" />
+                    <path d="M10 18h4" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-900">Collect</h3>
               </div>
-              <h3 class="text-lg font-semibold text-slate-900">Collect</h3>
+              <p class="mt-3 text-slate-600 text-sm leading-relaxed">
+                We combine ground-penetrating radar scans with your as-builts and
+                GIS map data to build a complete picture of what's underground.
+              </p>
             </div>
-            <p class="text-slate-600">
-              We combine ground-penetrating radar scans with your as-builts and
-              GIS map data to build a complete picture of what's underground.
-            </p>
           </div>
-          <div class="group flex h-full flex-col gap-5">
-            <div class="overflow-hidden rounded-2xl shadow-lg shadow-slate-900/10">
+          <div class="group flex h-full flex-col">
+            <div
+              class="overflow-hidden rounded-xl border border-slate-200"
+            >
               <img
                 src="view.png"
                 alt="Data processing and overlay creation"
-                class="w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+                class="w-full object-cover"
                 style="aspect-ratio: 4 / 3;"
               />
             </div>
-            <div class="flex items-center gap-3">
-              <div
-                class="flex h-10 w-10 items-center justify-center rounded-full bg-sky-100 text-sky-600"
-              >
-                <svg
-                  class="h-5 w-5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
+            <div class="mt-5">
+              <div class="flex items-center gap-3">
+                <div
+                  class="flex h-10 w-10 items-center justify-center rounded-full bg-sky-100 text-sky-600"
                 >
-                  <path d="M4 6h16M4 12h16M4 18h10" stroke-linecap="round" />
-                  <path d="M17 15l3 3-3 3" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+                  <svg
+                    class="h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <path d="M4 6h16M4 12h16M4 18h10" stroke-linecap="round" />
+                    <path
+                      d="M17 15l3 3-3 3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-900">Process</h3>
               </div>
-              <h3 class="text-lg font-semibold text-slate-900">Process</h3>
+              <p class="mt-3 text-slate-600 text-sm leading-relaxed">
+                Our platform fuses radar data with your existing records to create
+                accurate, georeferenced AR overlays ready for the field.
+              </p>
             </div>
-            <p class="text-slate-600">
-              Our platform fuses radar data with your existing records to create
-              accurate, georeferenced AR overlays ready for the field.
-            </p>
           </div>
-          <div class="group flex h-full flex-col gap-5">
-            <div class="overflow-hidden rounded-2xl shadow-lg shadow-slate-900/10">
+          <div class="group flex h-full flex-col">
+            <div
+              class="overflow-hidden rounded-xl border border-slate-200"
+            >
               <img
                 src="dig.png"
                 alt="Viewing underground utilities in AR on phone"
-                class="w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+                class="w-full object-cover"
                 style="aspect-ratio: 4 / 3;"
               />
             </div>
-            <div class="flex items-center gap-3">
-              <div
-                class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-600"
-              >
-                <svg
-                  class="h-5 w-5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
+            <div class="mt-5">
+              <div class="flex items-center gap-3">
+                <div
+                  class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-600"
                 >
-                  <rect x="5" y="2" width="14" height="20" rx="2" />
-                  <path d="M12 18h.01" stroke-linecap="round" />
-                  <path d="M9 5h6" stroke-linecap="round" />
-                </svg>
+                  <svg
+                    class="h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <rect x="5" y="2" width="14" height="20" rx="2" />
+                    <path d="M12 18h.01" stroke-linecap="round" />
+                    <path d="M9 5h6" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-slate-900">View in AR</h3>
               </div>
-              <h3 class="text-lg font-semibold text-slate-900">View in AR</h3>
+              <p class="mt-3 text-slate-600 text-sm leading-relaxed">
+                Open the app on your phone, point at the ground, and see buried
+                utilities rendered in augmented reality right where they are.
+              </p>
             </div>
-            <p class="text-slate-600">
-              Open the app on your phone, point at the ground, and see buried
-              utilities rendered in augmented reality right where they are.
-            </p>
           </div>
         </div>
       </div>
     </section>
 
     <section
-      class="relative overflow-hidden bg-white py-12 sm:py-14"
+      class="relative overflow-hidden py-16 sm:py-24"
       id="platform"
     >
       <div class="mx-auto max-w-6xl px-6">
-        <div class="grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
-          <div class="space-y-3">
+        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div>
             <p
-              class="inline-flex items-center gap-2 rounded-full bg-teal-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-800"
+              class="text-sm font-semibold uppercase tracking-wider text-teal-600"
             >
               Integrations
             </p>
             <h2
-              class="text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
+              class="mt-2 text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
             >
-              Bring Sub Vysion into your mapping stack.
+              Bring SubVysion into your mapping stack
             </h2>
-            <p class="text-lg text-slate-600">
+            <p class="mt-4 text-lg text-slate-600">
               Sync overlays with the GIS and CAD tools your teams already use,
               so AR stays in step with design and field updates.
             </p>
           </div>
           <div
-            class="rounded-2xl border border-slate-200 bg-white p-5 shadow-card"
+            class="rounded-2xl border border-slate-200 bg-white p-6"
           >
             <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               <div
@@ -553,139 +543,117 @@
     </section>
 
     <section
-      class="relative overflow-hidden bg-white py-12 sm:py-14"
+      class="relative overflow-hidden py-16 sm:py-24"
       id="pricing"
     >
       <div class="mx-auto max-w-6xl px-6">
-        <div class="space-y-3">
+        <div class="max-w-xl">
           <p
-            class="inline-flex items-center gap-2 rounded-full bg-teal-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-800"
+            class="text-sm font-semibold uppercase tracking-wider text-teal-600"
           >
             Pricing
           </p>
           <h2
-            class="text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
+            class="mt-2 text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
           >
-            Choose the right fit for your crews.
+            Choose the right fit for your crews
           </h2>
-          <p class="text-lg text-slate-600">
+          <p class="mt-4 text-lg text-slate-600">
             Flexible options whether you are piloting a crew or rolling out
             across the fleet.
           </p>
         </div>
-        <div class="mt-6 grid gap-4 md:grid-cols-2">
+        <div class="mt-12 grid gap-6 md:grid-cols-2">
           <div
-            class="flex h-full flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card"
+            class="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6"
           >
-            <div class="flex items-center justify-between">
-              <div>
-                <h3 class="text-xl font-semibold text-slate-900">Team</h3>
-                <p class="text-sm text-slate-600">
-                  For pilot crews and focused deployments.
-                </p>
-              </div>
-              <div class="text-right">
-                <div class="text-xl font-display font-semibold text-slate-900">
-                  Talk to sales
-                </div>
-              </div>
-            </div>
-            <ul class="space-y-2 text-sm text-slate-700">
-              <li class="flex items-center gap-2">
-                <span class="text-teal-700">✓</span><span
-                  >Uploads & cloud sync</span
-                >
+            <h3 class="text-xl font-semibold text-slate-900">Team</h3>
+            <p class="mt-1 text-sm text-slate-600">
+              For pilot crews and focused deployments.
+            </p>
+            <ul class="mt-6 space-y-3 text-sm text-slate-700 flex-1">
+              <li class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Uploads & cloud sync</span>
               </li>
-              <li class="flex items-center gap-2">
-                <span class="text-teal-700">✓</span><span>Platform</span>
+              <li class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Platform access</span>
               </li>
-              <li class="flex items-center gap-2">
-                <span class="text-teal-700">✓</span><span>AR App</span>
-              </li>
-              <li class="flex items-center gap-2 text-slate-400">
-                <span class="">–</span><span>SSO</span>
-              </li>
-              <li class="flex items-center gap-2 text-slate-400">
-                <span class="">–</span><span>Custom software integrations</span>
-              </li>
-              <li class="flex items-center gap-2 text-slate-400">
-                <span class="">–</span><span>Data export</span>
+              <li class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>AR App</span>
               </li>
             </ul>
-            <div class="pt-2">
-              <a
-                class="inline-flex items-center justify-center gap-2 rounded-xl border border-teal-700 bg-teal-700 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-teal-500/20 transition hover:-translate-y-0.5 hover:bg-teal-800"
-                href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Get started
-              </a>
-            </div>
+            <a
+              class="mt-6 inline-flex items-center justify-center rounded-full bg-teal-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-teal-700"
+              href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Get started
+            </a>
           </div>
           <div
-            class="flex h-full flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card"
+            class="flex h-full flex-col rounded-2xl border-2 border-teal-600 bg-white p-6"
           >
-            <div class="flex items-center justify-between">
-              <div>
-                <h3 class="text-xl font-semibold text-slate-900">Enterprise</h3>
-                <p class="text-sm text-slate-600">
-                  For full-field rollouts and advanced controls.
-                </p>
-              </div>
-              <div class="text-right">
-                <div class="text-xl font-display font-semibold text-slate-900">
-                  Talk to sales
-                </div>
-              </div>
-            </div>
-            <ul class="space-y-2 text-sm text-slate-700">
-              <li class="flex items-center gap-2">
-                <span class="text-teal-700">✓</span><span
-                  >Uploads & cloud sync</span
-                >
+            <h3 class="text-xl font-semibold text-slate-900">Enterprise</h3>
+            <p class="mt-1 text-sm text-slate-600">
+              For full-field rollouts and advanced controls.
+            </p>
+            <ul class="mt-6 space-y-3 text-sm text-slate-700 flex-1">
+              <li class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Everything in Team</span>
               </li>
-              <li class="flex items-center gap-2">
-                <span class="text-teal-700">✓</span><span>Platform</span>
+              <li class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>SSO</span>
               </li>
-              <li class="flex items-center gap-2">
-                <span class="text-teal-700">✓</span><span>AR App</span>
+              <li class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Custom software integrations</span>
               </li>
-              <li class="flex items-center gap-2">
-                <span class="text-teal-700">✓</span><span>SSO</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-teal-700">✓</span><span
-                  >Custom software integrations</span
-                >
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-teal-700">✓</span><span>Data export</span>
+              <li class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Data export</span>
               </li>
             </ul>
-            <div class="pt-2">
-              <a
-                class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-teal-800 shadow-sm transition hover:-translate-y-0.5 hover:border-teal-300"
-                href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Book a demo
-              </a>
-            </div>
+            <a
+              class="mt-6 inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+              href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Book a demo
+            </a>
           </div>
         </div>
       </div>
     </section>
 
     <section
-      class="relative overflow-hidden bg-white py-12 sm:py-14"
+      class="relative overflow-hidden py-16 sm:py-24"
       id="trusted"
     >
       <div class="mx-auto max-w-6xl px-6">
-        <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div
-            class="overflow-hidden rounded-2xl border border-slate-200 shadow-card"
+            class="overflow-hidden rounded-xl border border-slate-200"
           >
             <img
               src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1400&q=80"
@@ -693,52 +661,40 @@
               class="h-full w-full object-cover"
             />
           </div>
-          <div class="space-y-4">
+          <div>
             <p
-              class="inline-flex items-center gap-2 rounded-full bg-teal-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-teal-800"
+              class="text-sm font-semibold uppercase tracking-wider text-teal-600"
             >
               Trusted by field teams
             </p>
             <h3
-              class="text-2xl font-display font-semibold text-slate-900 sm:text-3xl"
+              class="mt-2 text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
             >
-              Built with crews and contractors in mind.
+              Built with crews and contractors in mind
             </h3>
-            <p class="text-lg text-slate-600">
-              From utility locators to general contractors, SubVysion keeps every
-              stakeholder aligned with clean, georeferenced data.
+            <p class="mt-4 text-lg text-slate-600">
+              From utility locators to general contractors, SubVysion keeps
+              every stakeholder aligned with clean, georeferenced data.
             </p>
-            <div class="grid gap-3 sm:grid-cols-2">
-              <div
-                class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
-              >
+            <div class="mt-8 flex flex-wrap gap-2">
+              <span class="rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700">
                 General contractors
-              </div>
-              <div
-                class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
-              >
+              </span>
+              <span class="rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700">
                 Utility locators
-              </div>
-              <div
-                class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
-              >
+              </span>
+              <span class="rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700">
                 Pipeline builders
-              </div>
-              <div
-                class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
-              >
+              </span>
+              <span class="rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700">
                 Fiber installers
-              </div>
-              <div
-                class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
-              >
+              </span>
+              <span class="rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700">
                 Excavation crews
-              </div>
-              <div
-                class="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
-              >
+              </span>
+              <span class="rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700">
                 Civil engineers
-              </div>
+              </span>
             </div>
           </div>
         </div>
@@ -746,88 +702,86 @@
     </section>
 
     <section
-      class="relative overflow-hidden bg-white py-12 sm:py-14"
+      class="relative overflow-hidden py-16 sm:py-24"
       id="contact"
     >
       <div class="mx-auto max-w-6xl px-6">
         <div
-          class="rounded-2xl bg-gradient-to-r from-teal-600 to-teal-700 p-8 shadow-xl md:p-10"
+          class="rounded-2xl bg-slate-900 p-8 md:p-12"
         >
-          <div class="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-start">
-            <div class="space-y-4">
-              <p
-                class="text-sm font-semibold uppercase tracking-wide text-teal-100"
-              >
-                Ready to see it live?
-              </p>
-              <h2 class="text-3xl font-display font-semibold text-white">
-                Bring AR overlays to your next dig window.
+          <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+            <div>
+              <h2 class="text-3xl font-display font-semibold text-white sm:text-4xl">
+                Bring AR overlays to your next dig window
               </h2>
-              <p class="text-base text-white/90">
-                Tell us about your sites, utilities, and timelines—we'll tailor
+              <p class="mt-4 text-lg text-slate-400">
+                Tell us about your sites, utilities, and timelines. We'll tailor
                 a demo to your crew and handoff requirements.
               </p>
-              <div class="flex flex-wrap gap-x-4 gap-y-2 pt-2">
+              <div class="mt-8 space-y-3">
                 <a
-                  class="inline-flex items-center gap-2 text-sm font-medium text-white underline decoration-white/60 underline-offset-4 transition hover:decoration-white"
+                  class="flex items-center gap-3 text-sm text-slate-300 hover:text-white transition"
                   href="mailto:maxwell@subvysion.com"
                 >
+                  <svg class="h-5 w-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg>
                   maxwell@subvysion.com
                 </a>
                 <a
-                  class="inline-flex items-center gap-2 text-sm font-medium text-white underline decoration-white/60 underline-offset-4 transition hover:decoration-white"
+                  class="flex items-center gap-3 text-sm text-slate-300 hover:text-white transition"
                   href="mailto:wenson@subvysion.com"
                 >
+                  <svg class="h-5 w-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg>
                   wenson@subvysion.com
                 </a>
                 <a
-                  class="inline-flex items-center gap-2 text-sm font-medium text-white underline decoration-white/60 underline-offset-4 transition hover:decoration-white"
+                  class="flex items-center gap-3 text-sm text-slate-300 hover:text-white transition"
                   href="tel:+12158747715"
                 >
+                  <svg class="h-5 w-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                  </svg>
                   (215) 874-7715
                 </a>
               </div>
             </div>
-            <form class="grid gap-3" on:submit={handleContactSubmit}>
-              <div class="grid gap-1">
-                <label class="text-sm font-medium text-white" for="name"
-                  >Name</label
-                >
+            <form class="space-y-4" on:submit={handleContactSubmit}>
+              <div>
+                <label class="block text-sm font-medium text-slate-300 mb-1.5" for="name">Name</label>
                 <input
                   id="name"
                   type="text"
                   name="name"
                   placeholder="Your name"
-                  class="w-full rounded-lg border border-white/30 bg-white/20 px-3 py-2.5 text-white placeholder-white/50 outline-none transition focus:border-white/50 focus:bg-white/25"
+                  class="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 outline-none transition focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
                 />
               </div>
-              <div class="grid gap-1">
-                <label class="text-sm font-medium text-white" for="email"
-                  >Email</label
-                >
+              <div>
+                <label class="block text-sm font-medium text-slate-300 mb-1.5" for="email">Email</label>
                 <input
                   id="email"
                   type="email"
                   name="email"
                   placeholder="name@company.com"
-                  class="w-full rounded-lg border border-white/30 bg-white/20 px-3 py-2.5 text-white placeholder-white/50 outline-none transition focus:border-white/50 focus:bg-white/25"
+                  class="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 outline-none transition focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
                 />
               </div>
-              <div class="grid gap-1">
-                <label class="text-sm font-medium text-white" for="details"
-                  >Project details</label
-                >
+              <div>
+                <label class="block text-sm font-medium text-slate-300 mb-1.5" for="details">Project details</label>
                 <textarea
                   id="details"
                   name="details"
                   rows="3"
                   placeholder="Utility type, timelines, sites..."
-                  class="w-full rounded-lg border border-white/30 bg-white/20 px-3 py-2.5 text-white placeholder-white/50 outline-none transition focus:border-white/50 focus:bg-white/25"
+                  class="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 outline-none transition focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
                 ></textarea>
               </div>
               <button
                 type="submit"
-                class="mt-2 inline-flex items-center justify-center rounded-lg bg-white px-4 py-3 text-sm font-semibold text-teal-700 shadow-lg transition hover:-translate-y-0.5 hover:bg-teal-50"
+                class="w-full inline-flex items-center justify-center rounded-full bg-teal-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-teal-700"
               >
                 Send message
               </button>
