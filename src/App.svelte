@@ -124,7 +124,7 @@
   <main class="relative z-10">
     <section class="relative overflow-hidden pt-40 pb-40 sm:pt-52 sm:pb-56 lg:pt-60 lg:pb-72 text-slate-900">
       <div
-        class="pointer-events-none absolute inset-0 -z-10 bg-[url('background.png')] bg-cover bg-center"
+        class="pointer-events-none absolute inset-0 -z-10 bg-[url('/background.png')] bg-cover bg-center"
       ></div>
       <div
         class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-white/90 via-white/70 to-transparent"
