@@ -72,14 +72,8 @@
       <div
         class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5 text-slate-900"
       >
-        <a href="#" class="flex items-center gap-2">
-          <img src="logo.svg" alt="SubVysion logo" class="h-9 w-9" />
-          <span
-            class="text-xl font-bold"
-            style="font-family: 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;"
-          >
-            SubVysion
-          </span>
+        <a href="#" class="flex items-center">
+          <img src="logo_full.svg" alt="SubVysion logo" class="h-8" />
         </a>
         <nav
           class="hidden items-center gap-7 text-base font-medium text-slate-700 md:flex"
