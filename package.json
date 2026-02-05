@@ -6,14 +6,19 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "playwright test",
+    "puppeteer-server": "node tests/puppeteer-server.mjs"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.1",
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "autoprefixer": "^10.4.22",
     "postcss": "^8.5.6",
     "svelte": "^4.2.8",
     "tailwindcss": "^3.4.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
     "vite": "^5.0.8"
   }
 }

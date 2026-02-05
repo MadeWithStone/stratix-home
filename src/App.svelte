@@ -131,11 +131,12 @@
           <h1
             class="text-4xl font-display font-bold leading-tight text-slate-900 sm:text-5xl lg:text-6xl tracking-tight"
           >
-            See every buried asset before you dig.
+            See what's below, before you break it.
           </h1>
           <p class="mt-6 text-lg text-slate-700 leading-relaxed">
-            We combine ground-penetrating radar with your GIS and as-built
-            data to create accurate AR overlays you can view on any phone.
+            Utility strikes cause $30B in damages annually. 1 in 3 are caused by
+            locator error or inaccurate maps. We give you 100% visibility with
+            complete mapping of underground utilities.
           </p>
           <div class="mt-8 flex flex-wrap gap-4">
             <a
@@ -166,20 +167,23 @@
           >
             Workflow
           </p>
-          <h2
+<h2
             class="mt-2 text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
           >
-            From Data to AR in Three Steps
+            Complete Mapping for Hidden Infrastructure
           </h2>
+          <p class="mt-4 text-lg text-slate-600">
+            Uses multi-sensor GPR and 3D-mapping techniques to create a
+            complete picture of underground utilities with 99% accuracy.
+          </p>
         </div>
         <div class="mt-12 grid gap-8 md:grid-cols-3">
           <div class="group flex h-full flex-col">
             <div
-              class="overflow-hidden rounded-xl border border-slate-200"
-            >
+              class="overflow-hidden rounded-xl border border-slate-200">
               <img
                 src="map.jpg"
-                alt="GPR and GIS data collection"
+                alt="GPR data collection"
                 class="w-full object-cover"
                 style="aspect-ratio: 4 / 3;"
               />
@@ -187,15 +191,13 @@
             <div class="mt-5">
               <div class="flex items-center gap-3">
                 <div
-                  class="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-teal-600"
-                >
+                  class="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-teal-600">
                   <svg
                     class="h-5 w-5"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                  >
+                    stroke-width="1.5">
                     <path
                       d="M12 3a5 5 0 0 1 5 5c0 3.5-3.8 7.3-4.6 8.1a.6.6 0 0 1-.8 0C10.8 15.3 7 11.5 7 8a5 5 0 0 1 5-5Z"
                     />
@@ -207,8 +209,8 @@
                 <h3 class="text-lg font-semibold text-slate-900">Collect</h3>
               </div>
               <p class="mt-3 text-slate-600 text-sm leading-relaxed">
-                We combine ground-penetrating radar scans with your as-builts and
-                GIS map data to build a complete picture of what's underground.
+                Process GPR data using multi-sensor techniques to create
+                complete underground visibility.
               </p>
             </div>
           </div>
@@ -243,11 +245,11 @@
                     />
                   </svg>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900">Process</h3>
+                <h3 class="text-lg font-semibold text-slate-900">Process GPR data</h3>
               </div>
               <p class="mt-3 text-slate-600 text-sm leading-relaxed">
-                Our platform fuses radar data with your existing records to create
-                accurate, georeferenced AR overlays ready for the field.
+                We align GPR data with 3D surface data, perform quality control
+                and validation, and build clean, accurate maps.
               </p>
             </div>
           </div>
@@ -279,11 +281,11 @@
                     <path d="M9 5h6" stroke-linecap="round" />
                   </svg>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900">View in AR</h3>
+                <h3 class="text-lg font-semibold text-slate-900">View intuitive AR visualizations</h3>
               </div>
               <p class="mt-3 text-slate-600 text-sm leading-relaxed">
-                Open the app on your phone, point at the ground, and see buried
-                utilities rendered in augmented reality right where they are.
+                View maps in augmented reality to see exactly where
+                infrastructure is, rather than relying on top-down, unaligned maps.
               </p>
             </div>
           </div>
@@ -297,7 +299,7 @@
     >
       <div class="mx-auto max-w-6xl px-6">
         <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
+<div>
             <p
               class="text-sm font-semibold uppercase tracking-wider text-teal-600"
             >
@@ -547,14 +549,14 @@
           >
             Pricing
           </p>
-          <h2
+<h2
             class="mt-2 text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
           >
-            Choose the right fit for your crews
+            Complete Mapping for Hidden Infrastructure
           </h2>
           <p class="mt-4 text-lg text-slate-600">
-            Flexible options whether you are piloting a crew or rolling out
-            across the fleet.
+            Uses multi-sensor GPR and 3D-mapping techniques to create a
+            complete picture of underground utilities with 99% accuracy.
           </p>
         </div>
         <div class="mt-12 grid gap-6 md:grid-cols-2">
@@ -606,7 +608,13 @@
                 <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
-                <span>Everything in Team</span>
+                <span>Complete mapping with 99% accuracy</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>AR visualization of underground infrastructure</span>
               </li>
               <li class="flex items-center gap-3">
                 <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -655,7 +663,7 @@
               class="h-full w-full object-cover"
             />
           </div>
-          <div>
+<div>
             <p
               class="text-sm font-semibold uppercase tracking-wider text-teal-600"
             >
