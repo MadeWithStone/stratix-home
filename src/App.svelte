@@ -4,6 +4,7 @@
   const CONTACT_EMAIL = "maxwell@subvysion.com";
   let scrollY = 0;
   let heroImage;
+  let isScrolled = false;
 
   const smoothScroll = (event) => {
     const href = event.currentTarget.getAttribute("href");
@@ -11,7 +12,13 @@
       event.preventDefault();
       const target = document.querySelector(href);
       if (target) {
-        target.scrollIntoView({ behavior: "smooth" });
+        const headerOffset = 100;
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
       }
     }
   };
@@ -22,6 +29,7 @@
       if (heroImage) {
         heroImage.style.transform = `translateY(${scrollY * 0.08}px)`;
       }
+      isScrolled = scrollY > 50;
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -61,51 +69,44 @@
 </svelte:head>
 
 <div class="relative min-h-screen overflow-hidden font-sans bg-white">
-  <!-- Subtle gradient color accents that scroll with page -->
-  <div class="pointer-events-none absolute top-0 left-0 right-0 h-[4000px] -z-10">
-    <div class="absolute top-[400px] left-[-10%] h-[800px] w-[800px] rounded-full bg-teal-400/20 blur-[200px]"></div>
-    <div class="absolute top-[1200px] right-[-10%] h-[700px] w-[700px] rounded-full bg-sky-400/15 blur-[200px]"></div>
-    <div class="absolute top-[2000px] left-[10%] h-[600px] w-[600px] rounded-full bg-emerald-400/15 blur-[200px]"></div>
-    <div class="absolute top-[2800px] right-[5%] h-[700px] w-[700px] rounded-full bg-teal-300/15 blur-[200px]"></div>
-  </div>
-  <header class="absolute top-0 left-0 right-0 z-30">
+  <header class="fixed inset-x-0 top-0 z-30 transition-all duration-300 {isScrolled ? 'py-3' : 'py-5'} backdrop-blur-xl {isScrolled ? 'bg-white/30 shadow-md border-b border-black/5' : 'border-b border-transparent'}">
       <div
-        class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-5 text-slate-900"
+        class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 text-black transition-all duration-300"
       >
         <a href="#" class="flex items-center">
-          <img src="logo_full.svg" alt="SubVysion logo" class="h-8" />
+          <img src="logo_full.svg" alt="SubVysion logo" class="h-10" />
         </a>
         <nav
-          class="hidden items-center gap-7 text-base font-medium text-slate-700 md:flex"
+          class="hidden items-center gap-7 text-base font-medium text-black/70 md:flex"
         >
           <a
-            class="hover:text-slate-900"
+            class="hover:text-black transition-all duration-300 hover:-translate-y-0.5"
             href="#workflow"
             on:click={smoothScroll}>Workflow</a
           >
           <a
-            class="hover:text-slate-900"
+            class="hover:text-black transition-all duration-300 hover:-translate-y-0.5"
             href="#platform"
             on:click={smoothScroll}>Platform</a
           >
           <a
-            class="hover:text-slate-900"
+            class="hover:text-black transition-all duration-300 hover:-translate-y-0.5"
             href="#pricing"
             on:click={smoothScroll}>Pricing</a
           >
           <a
-            class="hover:text-slate-900"
+            class="hover:text-black transition-all duration-300 hover:-translate-y-0.5"
             href="#trusted"
             on:click={smoothScroll}>Trusted</a
           >
           <a
-            class="hover:text-slate-900"
+            class="hover:text-black transition-all duration-300 hover:-translate-y-0.5"
             href="#contact"
             on:click={smoothScroll}>Contact</a
           >
         </nav>
         <a
-          class="inline-flex items-center gap-2 rounded-full bg-teal-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-700"
+          class="inline-flex items-center gap-2 rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
           href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
           target="_blank"
           rel="noreferrer"
@@ -115,85 +116,92 @@
       </div>
   </header>
 
-  <main class="relative z-10">
-    <section class="relative overflow-hidden pt-40 pb-40 sm:pt-52 sm:pb-56 lg:pt-60 lg:pb-72 text-slate-900">
-      <div
-        class="pointer-events-none absolute inset-0 -z-10 bg-[url('/background.png')] bg-cover bg-center"
-      ></div>
-      <div
-        class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-white/90 via-white/70 to-transparent"
-      ></div>
-      <div
-        class="pointer-events-none absolute inset-x-0 bottom-0 h-32 -z-10 bg-gradient-to-t from-white to-transparent"
-      ></div>
+  <main class="relative z-10 pt-24">
+    <section class="relative overflow-hidden pt-24 pb-40 sm:pt-40 sm:pb-56 lg:pt-48 lg:pb-64 bg-white">
+      <div class="pointer-events-none absolute inset-0 -z-10 bg-[url('/background.png')] bg-cover bg-center opacity-20"></div>
+      <div class="absolute inset-0 -z-10 opacity-50" style="background-image: radial-gradient(circle, #14b8a6 1.5px, transparent 1.5px); background-size: 25px 25px;"></div>
+      <div class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-white via-white/95 to-white"></div>
       <div class="relative mx-auto max-w-6xl px-6">
-        <div class="max-w-2xl">
-          <h1
-            class="text-4xl font-display font-bold leading-tight text-slate-900 sm:text-5xl lg:text-6xl tracking-tight"
-          >
-            See what's below, before you break it.
-          </h1>
-          <p class="mt-6 text-lg text-slate-700 leading-relaxed">
-            Utility strikes cause $30B in damages annually. 1 in 3 are caused by
-            locator error or inaccurate maps. We give you 100% visibility with
-            complete mapping of underground utilities.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-4">
-            <a
-              class="inline-flex items-center gap-2 rounded-full bg-teal-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-teal-700"
-              href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
-              target="_blank"
-              rel="noreferrer"
+        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div class="max-w-3xl">
+            <h1
+              class="text-3xl font-display font-bold leading-tight text-black sm:text-4xl lg:text-5xl tracking-tight"
             >
-              Schedule a walkthrough
-            </a>
-            <a
-              class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
-              href="#workflow"
-              on:click={smoothScroll}
-            >
-              See how it works
-            </a>
+              See what's below,
+              <br class="hidden sm:block" />
+              <span class="text-teal-600">before</span> you break it.
+            </h1>
+            <p class="mt-8 text-lg text-black/70 leading-relaxed sm:text-xl">
+              Utility strikes cause $30B in damages annually. 1 in 3 are caused by
+              locator error or inaccurate maps. We give you 100% visibility with
+              complete mapping of underground utilities.
+            </p>
+            <div class="mt-10 flex flex-wrap gap-4">
+              <a
+                class="inline-flex items-center gap-2 rounded-full bg-black px-8 py-4 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Schedule a walkthrough
+              </a>
+              <a
+                class="inline-flex items-center gap-2 rounded-full border-2 border-black/10 bg-white px-8 py-4 text-base font-semibold text-black transition-all duration-300 hover:border-black/20 hover:shadow-md hover:-translate-y-0.5"
+                href="#workflow"
+                on:click={smoothScroll}
+              >
+                See how it works
+              </a>
+            </div>
+          </div>
+          <div class="lg:pl-12">
+            <div class="rounded-3xl overflow-hidden shadow-2xl border border-slate-200">
+              <img
+                src="/main_scene_flat.png"
+                alt="SubVysion AR demo showing underground utilities visualization"
+                class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105"
+              />
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="relative overflow-hidden py-16 sm:py-24 bg-transparent" id="workflow">
+    <section class="relative overflow-hidden py-24 sm:py-32 bg-white" id="workflow">
       <div class="relative mx-auto max-w-6xl px-6">
-        <div class="max-w-xl">
+        <div class="max-w-2xl">
           <p
-            class="text-sm font-semibold uppercase tracking-wider text-teal-600"
+            class="text-sm font-semibold uppercase tracking-widest text-black/50"
           >
             Workflow
           </p>
-<h2
-            class="mt-2 text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
+          <h2
+            class="mt-3 text-4xl font-display font-bold text-black sm:text-5xl"
           >
             Complete Mapping for Hidden Infrastructure
           </h2>
-          <p class="mt-4 text-lg text-slate-600">
+          <p class="mt-5 text-lg text-black/70">
             Uses multi-sensor GPR and 3D-mapping techniques to create a
             complete picture of underground utilities with 99% accuracy.
           </p>
         </div>
-        <div class="mt-12 grid gap-8 md:grid-cols-3">
-          <div class="group flex h-full flex-col">
+        <div class="mt-16 grid gap-8 md:grid-cols-3">
+          <div class="group card-hover flex h-full flex-col rounded-2xl border border-slate-100 bg-white p-2 shadow-sm">
             <div
-              class="overflow-hidden rounded-xl border border-slate-200">
+              class="overflow-hidden rounded-xl border border-slate-50 bg-slate-50">
               <img
                 src="map.jpg"
                 alt="GPR data collection"
-                class="w-full object-cover"
+                class="w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 style="aspect-ratio: 4 / 3;"
               />
             </div>
-            <div class="mt-5">
+            <div class="mt-6 p-4">
               <div class="flex items-center gap-3">
                 <div
-                  class="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-teal-600">
+                  class="flex h-12 w-12 items-center justify-center rounded-xl bg-black text-white transition-all duration-300 group-hover:bg-teal-600">
                   <svg
-                    class="h-5 w-5"
+                    class="h-6 w-6"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -206,32 +214,30 @@
                     <path d="M10 18h4" stroke-linecap="round" />
                   </svg>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900">Collect</h3>
+                <h3 class="text-xl font-bold text-black">Collect</h3>
               </div>
-              <p class="mt-3 text-slate-600 text-sm leading-relaxed">
+              <p class="mt-4 text-black/70 text-base leading-relaxed">
                 Process GPR data using multi-sensor techniques to create
                 complete underground visibility.
               </p>
             </div>
           </div>
-          <div class="group flex h-full flex-col">
+          <div class="group card-hover flex h-full flex-col rounded-2xl border border-slate-100 bg-white p-2 shadow-sm">
             <div
-              class="overflow-hidden rounded-xl border border-slate-200"
-            >
+              class="overflow-hidden rounded-xl border border-slate-50 bg-slate-50">
               <img
                 src="view.png"
                 alt="Data processing and overlay creation"
-                class="w-full object-cover"
+                class="w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 style="aspect-ratio: 4 / 3;"
               />
             </div>
-            <div class="mt-5">
+            <div class="mt-6 p-4">
               <div class="flex items-center gap-3">
                 <div
-                  class="flex h-10 w-10 items-center justify-center rounded-full bg-sky-100 text-sky-600"
-                >
+                  class="flex h-12 w-12 items-center justify-center rounded-xl bg-black text-white transition-all duration-300 group-hover:bg-teal-600">
                   <svg
-                    class="h-5 w-5"
+                    class="h-6 w-6"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -245,32 +251,30 @@
                     />
                   </svg>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900">Process GPR data</h3>
+                <h3 class="text-xl font-bold text-black">Process GPR data</h3>
               </div>
-              <p class="mt-3 text-slate-600 text-sm leading-relaxed">
+              <p class="mt-4 text-black/70 text-base leading-relaxed">
                 We align GPR data with 3D surface data, perform quality control
                 and validation, and build clean, accurate maps.
               </p>
             </div>
           </div>
-          <div class="group flex h-full flex-col">
+          <div class="group card-hover flex h-full flex-col rounded-2xl border border-slate-100 bg-white p-2 shadow-sm">
             <div
-              class="overflow-hidden rounded-xl border border-slate-200"
-            >
+              class="overflow-hidden rounded-xl border border-slate-50 bg-slate-50">
               <img
                 src="dig.png"
                 alt="Viewing underground utilities in AR on phone"
-                class="w-full object-cover"
+                class="w-full object-cover transition-transform duration-300 group-hover:scale-105"
                 style="aspect-ratio: 4 / 3;"
               />
             </div>
-            <div class="mt-5">
+            <div class="mt-6 p-4">
               <div class="flex items-center gap-3">
                 <div
-                  class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-600"
-                >
+                  class="flex h-12 w-12 items-center justify-center rounded-xl bg-black text-white transition-all duration-300 group-hover:bg-teal-600">
                   <svg
-                    class="h-5 w-5"
+                    class="h-6 w-6"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -281,9 +285,9 @@
                     <path d="M9 5h6" stroke-linecap="round" />
                   </svg>
                 </div>
-                <h3 class="text-lg font-semibold text-slate-900">View intuitive AR visualizations</h3>
+                <h3 class="text-xl font-bold text-black">View intuitive AR visualizations</h3>
               </div>
-              <p class="mt-3 text-slate-600 text-sm leading-relaxed">
+              <p class="mt-4 text-black/70 text-base leading-relaxed">
                 View maps in augmented reality to see exactly where
                 infrastructure is, rather than relying on top-down, unaligned maps.
               </p>
@@ -293,114 +297,101 @@
       </div>
     </section>
 
-    <section
-      class="relative overflow-hidden py-16 sm:py-24"
+<section
+      class="relative overflow-hidden py-24 sm:py-32 bg-white"
       id="platform"
     >
       <div class="mx-auto max-w-6xl px-6">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
-<div>
+        <div class="grid gap-16 lg:grid-cols-2 lg:items-center">
+          <div>
             <p
-              class="text-sm font-semibold uppercase tracking-wider text-teal-600"
+              class="text-sm font-semibold uppercase tracking-widest text-black/50"
             >
               Integrations
             </p>
             <h2
-              class="mt-2 text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
+              class="mt-3 text-4xl font-display font-bold text-black sm:text-5xl"
             >
               Bring SubVysion into your mapping stack
             </h2>
-            <p class="mt-4 text-lg text-slate-600">
+            <p class="mt-5 text-lg text-black/70">
               Sync overlays with the GIS and CAD tools your teams already use,
               so AR stays in step with design and field updates.
             </p>
           </div>
           <div
-            class="rounded-2xl border border-slate-200 bg-white p-6"
-          >
+            class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg">
             <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               <div
-                class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
-              >
-                <span
-                  class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white"
-                >
+                class="card-hover flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 transition-all duration-300 hover:border-black/20 hover:bg-white hover:shadow-md">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white transition-all duration-300 shrink-0">
                   <svg
-                    class="h-5 w-5"
+                    class="h-6 w-6"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                  >
+                    stroke-width="1.5">
                     <circle cx="12" cy="12" r="9" />
                     <path d="M3 12h18" />
                     <path d="M12 3c2.5 3 2.5 15 0 18" />
                     <path d="M12 3c-2.5 3-2.5 15 0 18" />
                   </svg>
-                </span>
-                <div>
-                  <p class="text-sm font-semibold text-slate-900">ArcGIS</p>
-                  <p class="text-xs text-slate-500">Esri</p>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-sm font-bold text-black truncate">ArcGIS</p>
+                  <p class="text-xs text-black/50 truncate">Esri</p>
                 </div>
               </div>
               <div
-                class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
-              >
-                <span
-                  class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white"
-                >
+                class="card-hover flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 transition-all duration-300 hover:border-black/20 hover:bg-white hover:shadow-md">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white transition-all duration-300 shrink-0">
                   <svg
-                    class="h-5 w-5"
+                    class="h-6 w-6"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                  >
+                    stroke-width="1.5">
                     <path d="M12 4 5 19h14L12 4Z" />
                     <path d="M12 9.5 15 16H9l3-6.5Z" />
                   </svg>
-                </span>
-                <div>
-                  <p class="text-sm font-semibold text-slate-900">AutoCAD</p>
-                  <p class="text-xs text-slate-500">Autodesk</p>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-base font-bold text-black truncate">AutoCAD</p>
+                  <p class="text-xs text-black/50 truncate">Autodesk</p>
                 </div>
               </div>
               <div
-                class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
-              >
-                <span
-                  class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white"
-                >
+                class="card-hover flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 transition-all duration-300 hover:border-black/20 hover:bg-white hover:shadow-md">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white transition-all duration-300 shrink-0">
                   <svg
-                    class="h-5 w-5"
+                    class="h-6 w-6"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                  >
+                    stroke-width="1.5">
                     <path d="M12 3 6 7v10l6 4 6-4V7l-6-4Z" />
                     <path d="M6 7 12 11 18 7" />
                     <path d="M12 11v10" />
                   </svg>
-                </span>
-                <div>
-                  <p class="text-sm font-semibold text-slate-900">Revit</p>
-                  <p class="text-xs text-slate-500">Autodesk</p>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-base font-bold text-black truncate">Revit</p>
+                  <p class="text-xs text-black/50 truncate">Autodesk</p>
                 </div>
               </div>
               <div
-                class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
-              >
-                <span
-                  class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white"
-                >
+                class="card-hover flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 transition-all duration-300 hover:border-black/20 hover:bg-white hover:shadow-md">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white transition-all duration-300 shrink-0">
                   <svg
-                    class="h-5 w-5"
+                    class="h-6 w-6"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                  >
+                    stroke-width="1.5">
                     <path
                       d="M7 20c1.5-3 3.5-5 8-5 1.6 0 3.1.3 4.5.9"
                       stroke-linecap="round"
@@ -409,127 +400,112 @@
                     <path d="M8 4 6 12h4l2-5" stroke-linecap="round" />
                     <path d="M16 4 18 12h-4l-2-5" stroke-linecap="round" />
                   </svg>
-                </span>
-                <div>
-                  <p class="text-sm font-semibold text-slate-900">Bentley</p>
-                  <p class="text-xs text-slate-500">OpenRoads</p>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-base font-bold text-black truncate">Bentley</p>
+                  <p class="text-xs text-black/50 truncate">OpenRoads</p>
                 </div>
               </div>
               <div
-                class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
-              >
-                <span
-                  class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white"
-                >
+                class="card-hover flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 transition-all duration-300 hover:border-black/20 hover:bg-white hover:shadow-md">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white transition-all duration-300 shrink-0">
                   <svg
-                    class="h-5 w-5"
+                    class="h-6 w-6"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                  >
+                    stroke-width="1.5">
                     <circle cx="12" cy="12" r="7" />
                     <path d="M12 5v14M5 12h14" />
                     <path d="M9 9h6v6H9z" />
                   </svg>
-                </span>
-                <div>
-                  <p class="text-sm font-semibold text-slate-900">Trimble</p>
-                  <p class="text-xs text-slate-500">TBC</p>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-base font-bold text-black truncate">Trimble</p>
+                  <p class="text-xs text-black/50 truncate">TBC</p>
                 </div>
               </div>
               <div
-                class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
-              >
-                <span
-                  class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white"
-                >
+                class="card-hover flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 transition-all duration-300 hover:border-black/20 hover:bg-white hover:shadow-md">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white transition-all duration-300 shrink-0">
                   <svg
-                    class="h-5 w-5"
+                    class="h-6 w-6"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                  >
+                    stroke-width="1.5">
                     <path d="M5 5h14v10H5z" />
                     <path d="M9 15v4l3-2 3 2v-4" />
                     <circle cx="9" cy="9" r="1.2" />
                     <circle cx="15" cy="9" r="1.2" />
                   </svg>
-                </span>
-                <div>
-                  <p class="text-sm font-semibold text-slate-900">QGIS</p>
-                  <p class="text-xs text-slate-500">Desktop</p>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-base font-bold text-black truncate">QGIS</p>
+                  <p class="text-xs text-black/50 truncate">Desktop</p>
                 </div>
               </div>
               <div
-                class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
-              >
-                <span
-                  class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white"
-                >
+                class="card-hover flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 transition-all duration-300 hover:border-black/20 hover:bg-white hover:shadow-md">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white transition-all duration-300 shrink-0">
                   <svg
-                    class="h-5 w-5"
+                    class="h-6 w-6"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                  >
+                    stroke-width="1.5">
                     <path d="M7 8 4 12l3 4" stroke-linecap="round" />
                     <path d="M17 8 20 12l-3 4" stroke-linecap="round" />
                     <path d="M10 6h4v12h-4z" />
                   </svg>
-                </span>
+                </div>
                 <div>
-                  <p class="text-sm font-semibold text-slate-900">GeoJSON</p>
-                  <p class="text-xs text-slate-500">Import</p>
+                  <p class="text-base font-bold text-black">GeoJSON</p>
+                  <p class="text-xs text-black/50">Import</p>
                 </div>
               </div>
               <div
-                class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
-              >
-                <span
-                  class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white"
-                >
+                class="card-hover flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 transition-all duration-300 hover:border-black/20 hover:bg-white hover:shadow-md">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white transition-all duration-300 shrink-0">
                   <svg
-                    class="h-5 w-5"
+                    class="h-6 w-6"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                  >
+                    stroke-width="1.5">
                     <path d="M6 9h12l-6-4-6 4Z" />
                     <path d="M6 15h12l-6 4-6-4Z" />
                     <path d="M6 9v6l6 4 6-4V9l-6 4-6-4Z" />
                   </svg>
-                </span>
+                </div>
                 <div>
-                  <p class="text-sm font-semibold text-slate-900">KML</p>
-                  <p class="text-xs text-slate-500">Import</p>
+                  <p class="text-base font-bold text-black">KML</p>
+                  <p class="text-xs text-black/50">Import</p>
                 </div>
               </div>
               <div
-                class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3"
-              >
-                <span
-                  class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white"
-                >
+                class="card-hover flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 transition-all duration-300 hover:border-black/20 hover:bg-white hover:shadow-md">
+                <div
+                  class="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white transition-all duration-300 shrink-0">
                   <svg
-                    class="h-5 w-5"
+                    class="h-6 w-6"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                  >
+                    stroke-width="1.5">
                     <path d="M8 3h6l4 4v14H8z" />
                     <path d="M14 3v4h4" />
                     <path d="M10 12h4" />
                     <path d="M10 16h4" />
                   </svg>
-                </span>
+                </div>
                 <div>
-                  <p class="text-sm font-semibold text-slate-900">Shapefile</p>
-                  <p class="text-xs text-slate-500">Export</p>
+                  <p class="text-base font-bold text-black">Shapefile</p>
+                  <p class="text-xs text-black/50">Export</p>
                 </div>
               </div>
             </div>
@@ -539,56 +515,56 @@
     </section>
 
     <section
-      class="relative overflow-hidden py-16 sm:py-24"
+      class="relative overflow-hidden py-24 sm:py-32 bg-white"
       id="pricing"
     >
       <div class="mx-auto max-w-6xl px-6">
-        <div class="max-w-xl">
+        <div class="max-w-2xl">
           <p
-            class="text-sm font-semibold uppercase tracking-wider text-teal-600"
+            class="text-sm font-semibold uppercase tracking-widest text-black/50"
           >
             Pricing
           </p>
 <h2
-            class="mt-2 text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
+            class="mt-3 text-4xl font-display font-bold text-black sm:text-5xl"
           >
             Complete Mapping for Hidden Infrastructure
           </h2>
-          <p class="mt-4 text-lg text-slate-600">
+          <p class="mt-5 text-lg text-black/70">
             Uses multi-sensor GPR and 3D-mapping techniques to create a
             complete picture of underground utilities with 99% accuracy.
           </p>
         </div>
-        <div class="mt-12 grid gap-6 md:grid-cols-2">
+        <div class="mt-16 grid gap-6 md:grid-cols-2">
           <div
-            class="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6"
+            class="card-hover flex h-full flex-col rounded-3xl border-2 border-slate-200 bg-white p-8 shadow-md transition-all duration-300 hover:border-black/10 hover:shadow-xl"
           >
-            <h3 class="text-xl font-semibold text-slate-900">Team</h3>
-            <p class="mt-1 text-sm text-slate-600">
+            <h3 class="text-2xl font-bold text-black">Team</h3>
+            <p class="mt-2 text-base text-black/70">
               For pilot crews and focused deployments.
             </p>
-            <ul class="mt-6 space-y-3 text-sm text-slate-700 flex-1">
-              <li class="flex items-center gap-3">
-                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <ul class="mt-8 space-y-4 text-base text-black/80 flex-1">
+              <li class="flex items-start gap-3">
+                <svg class="mt-0.5 h-6 w-6 shrink-0 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
                 <span>Uploads & cloud sync</span>
               </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <li class="flex items-start gap-3">
+                <svg class="mt-0.5 h-6 w-6 shrink-0 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
                 <span>Platform access</span>
               </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <li class="flex items-start gap-3">
+                <svg class="mt-0.5 h-6 w-6 shrink-0 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
                 <span>AR App</span>
               </li>
             </ul>
             <a
-              class="mt-6 inline-flex items-center justify-center rounded-full bg-teal-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-teal-700"
+              class="btn-hover mt-8 inline-flex items-center justify-center rounded-full border-2 border-black px-6 py-4 text-base font-semibold text-black transition-all duration-300 hover:bg-black hover:text-white hover:shadow-xl"
               href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
               target="_blank"
               rel="noreferrer"
@@ -597,46 +573,46 @@
             </a>
           </div>
           <div
-            class="flex h-full flex-col rounded-2xl border-2 border-teal-600 bg-white p-6"
+            class="card-hover flex h-full flex-col rounded-3xl border-2 border-teal-600 bg-white p-8 shadow-lg transition-all duration-300 hover:border-teal-700 hover:shadow-2xl"
           >
-            <h3 class="text-xl font-semibold text-slate-900">Enterprise</h3>
-            <p class="mt-1 text-sm text-slate-600">
+            <h3 class="text-2xl font-bold text-black">Enterprise</h3>
+            <p class="mt-2 text-base text-black/70">
               For full-field rollouts and advanced controls.
             </p>
-            <ul class="mt-6 space-y-3 text-sm text-slate-700 flex-1">
-              <li class="flex items-center gap-3">
-                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <ul class="mt-8 space-y-4 text-base text-black/80 flex-1">
+              <li class="flex items-start gap-3">
+                <svg class="mt-0.5 h-6 w-6 shrink-0 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
                 <span>Complete mapping with 99% accuracy</span>
               </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <li class="flex items-start gap-3">
+                <svg class="mt-0.5 h-6 w-6 shrink-0 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
                 <span>AR visualization of underground infrastructure</span>
               </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <li class="flex items-start gap-3">
+                <svg class="mt-0.5 h-6 w-6 shrink-0 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
                 <span>SSO</span>
               </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <li class="flex items-start gap-3">
+                <svg class="mt-0.5 h-6 w-6 shrink-0 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
                 <span>Custom software integrations</span>
               </li>
-              <li class="flex items-center gap-3">
-                <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <li class="flex items-start gap-3">
+                <svg class="mt-0.5 h-6 w-6 shrink-0 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
                 <span>Data export</span>
               </li>
             </ul>
             <a
-              class="mt-6 inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+              class="btn-hover mt-8 inline-flex items-center justify-center rounded-full bg-black px-6 py-4 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-teal-600 hover:shadow-2xl hover:-translate-y-1"
               href="https://subvysion.setmore.com/services/71a943e6-77b0-4cdb-934f-de94600a9bb5"
               target="_blank"
               rel="noreferrer"
@@ -648,53 +624,52 @@
       </div>
     </section>
 
-    <section
-      class="relative overflow-hidden py-16 sm:py-24"
+<section
+      class="relative overflow-hidden py-24 sm:py-32 bg-white"
       id="trusted"
     >
       <div class="mx-auto max-w-6xl px-6">
-        <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div class="grid gap-16 lg:grid-cols-2 lg:items-center">
           <div
-            class="overflow-hidden rounded-xl border border-slate-200"
-          >
+            class="overflow-hidden rounded-3xl border border-slate-200 shadow-lg">
             <img
               src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1400&q=80"
               alt="Construction site with workers"
-              class="h-full w-full object-cover"
+              class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
             />
           </div>
-<div>
+          <div>
             <p
-              class="text-sm font-semibold uppercase tracking-wider text-teal-600"
+              class="text-sm font-semibold uppercase tracking-widest text-black/50"
             >
               Trusted by field teams
             </p>
             <h3
-              class="mt-2 text-3xl font-display font-semibold text-slate-900 sm:text-4xl"
+              class="mt-3 text-4xl font-display font-bold text-black sm:text-5xl"
             >
               Built with crews and contractors in mind
             </h3>
-            <p class="mt-4 text-lg text-slate-600">
+            <p class="mt-6 text-xl text-black/70 leading-relaxed">
               From utility locators to general contractors, SubVysion keeps
               every stakeholder aligned with clean, georeferenced data.
             </p>
-            <div class="mt-8 flex flex-wrap gap-2">
-              <span class="rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700">
+            <div class="mt-10 flex flex-wrap gap-3">
+              <span class="rounded-full border border-slate-200 bg-white px-5 py-3 text-base font-medium text-black transition-all duration-300 hover:border-black/20 hover:bg-black hover:text-white hover:shadow-md">
                 General contractors
               </span>
-              <span class="rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700">
+              <span class="rounded-full border border-slate-200 bg-white px-5 py-3 text-base font-medium text-black transition-all duration-300 hover:border-black/20 hover:bg-black hover:text-white hover:shadow-md">
                 Utility locators
               </span>
-              <span class="rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700">
+              <span class="rounded-full border border-slate-200 bg-white px-5 py-3 text-base font-medium text-black transition-all duration-300 hover:border-black/20 hover:bg-black hover:text-white hover:shadow-md">
                 Pipeline builders
               </span>
-              <span class="rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700">
+              <span class="rounded-full border border-slate-200 bg-white px-5 py-3 text-base font-medium text-black transition-all duration-300 hover:border-black/20 hover:bg-black hover:text-white hover:shadow-md">
                 Fiber installers
               </span>
-              <span class="rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700">
+              <span class="rounded-full border border-slate-200 bg-white px-5 py-3 text-base font-medium text-black transition-all duration-300 hover:border-black/20 hover:bg-black hover:text-white hover:shadow-md">
                 Excavation crews
               </span>
-              <span class="rounded-full bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700">
+              <span class="rounded-full border border-slate-200 bg-white px-5 py-3 text-base font-medium text-black transition-all duration-300 hover:border-black/20 hover:bg-black hover:text-white hover:shadow-md">
                 Civil engineers
               </span>
             </div>
@@ -704,25 +679,25 @@
     </section>
 
     <section
-      class="relative overflow-hidden py-16 sm:py-24"
+      class="relative overflow-hidden py-24 sm:py-32 bg-white"
       id="contact"
     >
       <div class="mx-auto max-w-6xl px-6">
         <div
-          class="rounded-2xl bg-slate-900 p-8 md:p-12"
+          class="rounded-3xl bg-black p-10 md:p-14 shadow-2xl"
         >
-          <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+          <div class="grid gap-12 lg:grid-cols-2 lg:items-start">
             <div>
-              <h2 class="text-3xl font-display font-semibold text-white sm:text-4xl">
+              <h2 class="text-4xl font-display font-bold text-white sm:text-5xl">
                 Bring AR overlays to your next dig window
               </h2>
-              <p class="mt-4 text-lg text-slate-400">
+              <p class="mt-6 text-xl text-white/80">
                 Tell us about your sites, utilities, and timelines. We'll tailor
                 a demo to your crew and handoff requirements.
               </p>
-              <div class="mt-8 space-y-3">
+              <div class="mt-10 space-y-4">
                 <a
-                  class="flex items-center gap-3 text-sm text-slate-300 hover:text-white transition"
+                  class="btn-hover flex items-center gap-3 text-base text-white/90 transition-all duration-300 hover:text-white hover:-translate-x-1"
                   href="mailto:maxwell@subvysion.com"
                 >
                   <svg class="h-5 w-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -731,7 +706,7 @@
                   maxwell@subvysion.com
                 </a>
                 <a
-                  class="flex items-center gap-3 text-sm text-slate-300 hover:text-white transition"
+                  class="btn-hover flex items-center gap-3 text-base text-white/90 transition-all duration-300 hover:text-white hover:-translate-x-1"
                   href="mailto:wenson@subvysion.com"
                 >
                   <svg class="h-5 w-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -740,7 +715,7 @@
                   wenson@subvysion.com
                 </a>
                 <a
-                  class="flex items-center gap-3 text-sm text-slate-300 hover:text-white transition"
+                  class="btn-hover flex items-center gap-3 text-base text-white/90 transition-all duration-300 hover:text-white hover:-translate-x-1"
                   href="tel:+12158747115"
                 >
                   <svg class="h-5 w-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -750,40 +725,40 @@
                 </a>
               </div>
             </div>
-            <form class="space-y-4" on:submit={handleContactSubmit}>
+            <form class="space-y-5" on:submit={handleContactSubmit}>
               <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1.5" for="name">Name</label>
+                <label class="block text-sm font-medium text-white/90 mb-2" for="name">Name</label>
                 <input
                   id="name"
                   type="text"
                   name="name"
                   placeholder="Your name"
-                  class="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 outline-none transition focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                  class="w-full rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white placeholder-white/50 outline-none transition-all duration-300 focus:border-teal-500 focus:bg-white/20 focus:shadow-lg focus:ring-2 focus:ring-teal-500/50"
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1.5" for="email">Email</label>
+                <label class="block text-sm font-medium text-white/90 mb-2" for="email">Email</label>
                 <input
                   id="email"
                   type="email"
                   name="email"
                   placeholder="name@company.com"
-                  class="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 outline-none transition focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                  class="w-full rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white placeholder-white/50 outline-none transition-all duration-300 focus:border-teal-500 focus:bg-white/20 focus:shadow-lg focus:ring-2 focus:ring-teal-500/50"
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-slate-300 mb-1.5" for="details">Project details</label>
+                <label class="block text-sm font-medium text-white/90 mb-2" for="details">Project details</label>
                 <textarea
                   id="details"
                   name="details"
                   rows="3"
                   placeholder="Utility type, timelines, sites..."
-                  class="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-3 text-white placeholder-slate-500 outline-none transition focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+                  class="w-full rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-white placeholder-white/50 outline-none transition-all duration-300 focus:border-teal-500 focus:bg-white/20 focus:shadow-lg focus:ring-2 focus:ring-teal-500/50"
                 ></textarea>
               </div>
               <button
                 type="submit"
-                class="w-full inline-flex items-center justify-center rounded-full bg-teal-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-teal-700"
+                class="btn-hover w-full inline-flex items-center justify-center rounded-full bg-teal-600 px-6 py-4 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:bg-teal-500 hover:shadow-2xl hover:-translate-y-0.5"
               >
                 Send message
               </button>
